@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Kalkulator Kredytowy</title>
+</h:head>
+<h:body>
+	<p:panel header="Kalkulator Kredytowy" toggleable="true"
+		closable="true" toggleSpeed="300" closeSpeed="300" widgetVar="panel">
+
+		<h:form id="bla">
+
+			<h:panelGrid id="grid" columns="3" cellpadding="7">
+
+				<p:outputLabel for="kwota" value="kwota:" />
+				<p:inputText id="kwota" value="#{kredytBB.kwota}"
+					styleClass="ui-button-raised" required="true"
+					requiredMessage="Brak wprowadzenia kwoty" />
+				<p:message for="kwota" />
+
+
+				<p:outputLabel for="liczba_lat" value="liczba lat:" />
+				<p:inputText id="liczba_lat" value="#{kredytBB.liczba_lat}"
+					styleClass="ui-button-raised" required="true"
+					requiredMessage="Brak wprowadzenia liczby lat" />
+				<p:message for="liczba_lat" />
+
+
+				<p:outputLabel for="proc" value="oprocentowanie:" />
+				<p:inputText id="proc" value="#{kredytBB.proc}"
+					styleClass="ui-button-raised" required="true"
+					requiredMessage="Brak wprowadzenia oprocentowania" />
+				<p:message for="proc" />
+
+
+
+				<p:commandButton value="Oblicz" action="#{kredytBB.calc()}"
+					update="@form" />
+
+				<p:commandButton value="Oblicz (AJAX)"
+					action="#{kredytBB.calc_AJAX()}"
+					styleClass="ui-button-raised ui-button-secondary" update="msg">
+				</p:commandButton>
+
+
+
+			</h:panelGrid>
+
+			<p:messages id="msg" />
+		</h:form>
+	</p:panel>
+</h:body>
+</html>

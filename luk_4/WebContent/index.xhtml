@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+
+		<p:panel header="Kalkulator Kredytowy">
+
+			<p:messages id="msg" />
+
+			<h:form>
+				<h:panelGrid id="grid" columns="3" cellpadding="7">
+					<p:outputLabel for="id_kwota" value="kwota:" />
+					<p:inputText id="id_kwota" value="#{kredytBB.kwota}"
+						styleClass="ui-button-raised" required="true"
+						requiredMessage="Brak wprowadzenia kwoty"
+						converterMessage="Wartość musi być liczbą"
+						validatorMessage="Kwota musi byś większa od 3000">
+						<f:validateDoubleRange minimum="3000" />
+					</p:inputText>
+					<p:message for="id_kwota" />
+
+					<p:outputLabel for="id_liczba_lat" value="liczba lat:" />
+					<p:inputText id="id_liczba_lat" value="#{kredytBB.liczba_lat}"
+						styleClass="ui-button-raised" required="true"
+						requiredMessage="Brak wprowadzenia liczby lat"
+						converterMessage="Wartość musi być liczbą"
+						validatorMessage="Liczba lat musi byś większa od 3 i mniejsza od 50">
+						<f:validateLongRange minimum="3" maximum="50" />
+					</p:inputText>
+					<p:message for="id_liczba_lat" />
+
+					<p:outputLabel for="id_proc" value="oprocentowanie:" />
+					<p:inputText id="id_proc" value="#{kredytBB.proc}"
+						styleClass="ui-button-raised" required="true"
+						requiredMessage="Brak wprowadzenia oprocentowania"
+						converterMessage="Wartość musi być liczbą"
+						validatorMessage="Oprocentowanie musi byś większe od 0">
+						<f:validateDoubleRange minimum="1" />
+					</p:inputText>
+					<p:message for="id_proc" />
+
+
+					<p:commandButton value="Oblicz" action="#{kredytBB.calc()}"
+						update="msg" styleClass="mr-2 ui-button-warning"
+						style="width: 10rem" />
+				</h:panelGrid>
+				<p:commandLink value="Informacje" action="#{kredytBB.info()}" />
+
+			</h:form>
+
+		</p:panel>
+
+	</ui:define>
+
+</ui:composition>
+</html>

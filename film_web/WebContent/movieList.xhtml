@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Movie Service</title>
+</h:head>
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:panel header="Opcje wyszukiwania" toggleable="true" collapsed="true"
+		style="margin-bottom: 1em;">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="movie name:" />
+				<p:inputText value="#{movieListBB.nameMovie}" />
+				<p:commandButton value="Search" update="form-table" />
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+
+	<p:messages />
+
+	<h:form id="form-table" style="margin-bottom:1em;">
+
+		<p:commandButton value="Add new movie"
+			action="#{movieListBB.newMovie()}" style="margin-bottom:1em;"/>
+
+		<p:dataTable value="#{movieListBB.list}" var="m">
+
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="name " />
+				</f:facet>
+				<h:outputText value="#{m.nameMovie}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="genre " />
+				</f:facet>
+				<h:outputText value="#{m.genreMovie}" />
+			</p:column>
+
+			<p:column priority="4">
+				<f:facet name="header">
+					<h:outputText value="price " />
+				</f:facet>
+				<h:outputText value="#{m.priceMovie}">
+				</h:outputText>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="options" />
+				</f:facet>
+
+				<p:commandButton value="Edit"
+					action="#{movieListBB.editMovie(m)}" style="margin-right:1em;"/>
+
+				<p:commandButton value="Delete"
+					action="#{movieListBB.deleteMovie(m)}" update="@form" />
+
+			
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

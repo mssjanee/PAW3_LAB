@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:viewAction action="#{movieEditBB.onLoad()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Movie Service</title>
+</h:head>
+
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:panel toggleable="true" header="Edycja rekordu">
+
+		<h:form rendered="#{movieEditBB.movie != null}">
+			<h:panelGrid columns="3" cellpadding="5">
+
+				<h:outputLabel for="m-name" value="name:" />
+				<p:inputText id="m-name" value="#{movieEditBB.movie.nameMovie}"
+					required="true" requiredMessage="Enter name"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="m-name" display="icon"/>
+
+				<h:outputLabel for="m-genre" value="genre:" />
+				<p:inputText id="m-genre" value="#{movieEditBB.movie.genreMovie}"
+					required="true" requiredMessage="Enter genre"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="m-genre" display="icon"/>
+
+				<h:outputLabel for="m-price" value="price:" />
+				<p:inputText id="m-price" value="#{movieEditBB.movie.priceMovie}"
+					required="true" requiredMessage="Enter price">
+			    </p:inputText>
+				<p:message for="m-price" display="icon"/>
+			</h:panelGrid>
+
+			<p:messages id="msgs" />
+
+			<p:commandButton value="Save" action="#{movieEditBB.saveData()}"
+				style="margin-right: 1em;" update="@form" />
+
+			<p:button value="Cancel" outcome="movieList" />
+		</h:form>
+
+	</p:panel>
+
+</h:body>
+
+</html>
